@@ -18,12 +18,16 @@ class _MainFoodScreenState extends State<MainFoodScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
-        children: [
+      children: [
         HeadWidgetFood(),
         SizedBox(
           height: Dimensions.height20,
         ),
-        Expanded(child: SingleChildScrollView(child: FoodBody()))
+        Expanded(
+          child: SingleChildScrollView(
+            child: FoodBody(),
+          ),
+        ),
       ],
     ));
   }

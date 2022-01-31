@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout/screen/food/icon_and_text_body.dart';
 import 'package:flutter_layout/screen/main_food_screen.dart';
 import 'package:flutter_layout/until/dimention.dart';
+import 'package:flutter_layout/widget/app_column.dart';
 import 'package:flutter_layout/widget/text_widget.dart';
 
 class FoodBody extends StatefulWidget {
@@ -64,6 +65,7 @@ class _FoodBodyState extends State<FoodBody> {
         SizedBox(
           height: Dimensions.height30,
         ),
+
         //Poppular Text
         Container(
           margin: EdgeInsets.only(left: Dimensions.width30),
@@ -101,46 +103,94 @@ class _FoodBodyState extends State<FoodBody> {
         Container(
           height: 700,
           child: ListView.builder(
-            physics: AlwaysScrollableScrollPhysics(),
-            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            // shrinkWrap: true,
             itemCount: 10,
-            itemBuilder: (context, int index) => 
-            Container(
-              margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20,bottom: Dimensions.height10),
+            itemBuilder: (context, int index) => Container(
+              margin: EdgeInsets.only(
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                  bottom: Dimensions.height10),
               child: Row(
                 children: [
                   Container(
-                    height: 120,
-                    width: 120,
+                    height: Dimensions.ListViewImgSize,
+                    width: Dimensions.ListViewImgSize,
                     decoration: BoxDecoration(
                       color: Colors.white24,
                       borderRadius: BorderRadius.circular(Dimensions.radius15),
                       image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage("./assets/image/pic_1.jpeg",
-                        )
-                        ),
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                            "./assets/image/pic_1.jpeg",
+                          )),
                     ),
                   ),
-                  Container(
-                    width: 220,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      // ignore: prefer_const_literals_to_create_immutables
-                      boxShadow: [
-                          BoxShadow(color: Colors.grey.shade400, blurRadius: 9.0,offset: Offset(0, 5)),
-                          // BoxShadow(color: Colors.white, offset: Offset(-5, 0)),
-                          BoxShadow(color: Colors.white, offset: Offset(5, 0)),
-                      ],
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(Dimensions.radius15),
-                        bottomRight: Radius.circular(Dimensions.radius15)
-                      )),
+                  Expanded(
+                    child: Container(
+                      height: Dimensions.ListViewTextSize,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          // ignore: prefer_const_literals_to_create_immutables
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.shade400,
+                                blurRadius: 9.0,
+                                offset: Offset(0, 5)),
+                            // BoxShadow(color: Colors.white, offset: Offset(-5, 0)),
+                            BoxShadow(
+                                color: Colors.white, offset: Offset(5, 0)),
+                          ],
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(Dimensions.radius15),
+                              bottomRight:
+                                  Radius.circular(Dimensions.radius15))),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: Dimensions.width10,
+                          right: Dimensions.width10,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            BigText(text: "Nutritions fruit meal in China"),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            SmallText(
+                                text: "With chinese characteristric",
+                                color: Colors.grey.shade400),
+                            SizedBox(
+                              height: Dimensions.height10,
+                            ),
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconAndTextWidget(
+                                      icon: Icons.circle,
+                                      text: "Normal",
+                                      iconColor: Colors.amberAccent),
+                                  IconAndTextWidget(
+                                      icon: Icons.location_on,
+                                      text: "1.7mk",
+                                      iconColor: Colors.blueAccent),
+                                  IconAndTextWidget(
+                                    icon: Icons.access_time,
+                                    text: "34min",
+                                    iconColor: Colors.orangeAccent,
+                                  ),
+                                ])
+                          ],
+                        ),
+                      ),
+                    ),
                   )
                 ],
               ),
-              ), ),
+            ),
+          ),
         )
       ],
     );
@@ -205,71 +255,11 @@ class _FoodBodyState extends State<FoodBody> {
               BoxShadow(color: Colors.white, offset: Offset(5, 0)),
             ], borderRadius: BorderRadius.circular(30), color: Colors.white),
             child: Container(
-              padding: EdgeInsets.only(
-                  left: 10, right: 10, top: Dimensions.height15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BigText(
-                    text: "Chinese Side ",
-                  ),
-                  SizedBox(
-                    height: Dimensions.height10,
-                  ),
-                  Row(
-                    children: [
-                      Wrap(
-                        children: List.generate(
-                          5,
-                          (index) => const Icon(
-                            Icons.star,
-                            color: Colors.blue,
-                            size: 15,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      SmallText(text: "4.5", color: Colors.grey),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      SmallText(text: "1200", color: Colors.grey),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      SmallText(text: "Comments", color: Colors.grey),
-                    ],
-                  ),
-                  SizedBox(
-                    height: Dimensions.height20,
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconAndTextWidget(
-                          icon: Icons.circle,
-                          iconColor: Colors.amberAccent,
-                          text: 'Normal',
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.location_on,
-                          iconColor: Colors.blue[200],
-                          text: '1.4km',
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.access_time,
-                          iconColor: Colors.orangeAccent,
-                          text: '34mim',
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
+                padding: EdgeInsets.only(
+                    left: 10, right: 10, top: Dimensions.height15),
+                child: AppColumn(
+                  text: 'Blind',
+                )),
           ),
         )
       ]),

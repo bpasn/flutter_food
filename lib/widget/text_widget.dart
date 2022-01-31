@@ -18,7 +18,8 @@ class BigText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      // overflow: textoverflow,
+      maxLines: 1,
+      overflow: textoverflow,
       style: TextStyle(
         color: color,
         fontFamily: "Sukumvit",
