@@ -1,7 +1,11 @@
+// ignore_for_file: sized_box_for_whitespace, avoid_unnecessary_containers, prefer_const_constructors
+
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_layout/screen/food/icon_and_text_body.dart';
 import 'package:flutter_layout/screen/main_food_screen.dart';
 import 'package:flutter_layout/until/dimention.dart';
+import 'package:flutter_layout/widget/text_widget.dart';
 
 class FoodBody extends StatefulWidget {
   @override
@@ -36,6 +40,7 @@ class _FoodBodyState extends State<FoodBody> {
     print("Dimensions>>>>>" + Dimensions.screenHeight.toString());
     return Column(
       children: [
+        //section card
         Container(
           height: Dimensions.pageView,
           child: PageView.builder(
@@ -44,6 +49,7 @@ class _FoodBodyState extends State<FoodBody> {
             itemCount: 5,
           ),
         ),
+        //dots
         DotsIndicator(
           dotsCount: 5,
           position: _curntPageValue,
@@ -53,6 +59,88 @@ class _FoodBodyState extends State<FoodBody> {
             activeShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5.0)),
           ),
+        ),
+
+        SizedBox(
+          height: Dimensions.height30,
+        ),
+        //Poppular Text
+        Container(
+          margin: EdgeInsets.only(left: Dimensions.width30),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(
+                text: "Popular",
+              ),
+              SizedBox(
+                width: Dimensions.width10,
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 3),
+                child: BigText(
+                  text: ".",
+                  color: Colors.black26,
+                ),
+              ),
+              SizedBox(
+                width: Dimensions.width10,
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 2),
+                child: SmallText(
+                  text: "Food pairing",
+                  color: Colors.black26,
+                ),
+              )
+            ],
+          ),
+        ),
+
+        //List Food
+        Container(
+          height: 700,
+          child: ListView.builder(
+            physics: AlwaysScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 10,
+            itemBuilder: (context, int index) => 
+            Container(
+              margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20,bottom: Dimensions.height10),
+              child: Row(
+                children: [
+                  Container(
+                    height: 120,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(Dimensions.radius15),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage("./assets/image/pic_1.jpeg",
+                        )
+                        ),
+                    ),
+                  ),
+                  Container(
+                    width: 220,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      boxShadow: [
+                          BoxShadow(color: Colors.grey.shade400, blurRadius: 9.0,offset: Offset(0, 5)),
+                          // BoxShadow(color: Colors.white, offset: Offset(-5, 0)),
+                          BoxShadow(color: Colors.white, offset: Offset(5, 0)),
+                      ],
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(Dimensions.radius15),
+                        bottomRight: Radius.circular(Dimensions.radius15)
+                      )),
+                  )
+                ],
+              ),
+              ), ),
         )
       ],
     );
@@ -60,7 +148,6 @@ class _FoodBodyState extends State<FoodBody> {
 
   Widget getWidgetFoodBody(int index) {
     Matrix4 matrix = new Matrix4.identity();
-
     if (index == _curntPageValue.floor()) {
       var currScal = 1 - (_curntPageValue - index) * (1 - _scaleFator);
       var currTran = _heigth * (1 - currScal) / 2;
@@ -96,7 +183,7 @@ class _FoodBodyState extends State<FoodBody> {
           decoration: BoxDecoration(
             image: const DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage('./assets/pic_food/pic_1.jpeg'),
+              image: AssetImage('./assets/image/pic_1.jpeg'),
             ),
             borderRadius: BorderRadius.circular(30),
           ),
@@ -175,36 +262,8 @@ class _FoodBodyState extends State<FoodBody> {
                         IconAndTextWidget(
                           icon: Icons.access_time,
                           iconColor: Colors.orangeAccent,
-                          text: 'Normal',
+                          text: '34mim',
                         ),
-                        //  SizedBox(
-                        //   width: 15,
-                        // ),
-                        // Container(
-                        //   child: Row(
-                        //     children: [
-                        //       Icon(Icons.location_on, color: Colors.blue[200]),
-                        //       SmallText(
-                        //         text: "1.4km",
-                        //         color: Colors.grey,
-                        //       )
-                        //     ],
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   width: 15,
-                        // ),
-                        // Container(
-                        //   child: Row(
-                        //     children: [
-                        //       Icon(Icons.access_time, color: Colors.orange),
-                        //       SmallText(
-                        //         text: "34min",
-                        //         color: Colors.grey,
-                        //       )
-                        //     ],
-                        //   ),
-                        // ),
                       ],
                     ),
                   )
@@ -214,41 +273,6 @@ class _FoodBodyState extends State<FoodBody> {
           ),
         )
       ]),
-    );
-  }
-}
-
-class IconAndTextWidget extends StatelessWidget {
-  String text;
-  IconData icon;
-  Color? iconColor;
-  Color? textColor;
-
-  IconAndTextWidget(
-      {Key? key,
-      required this.icon,
-      this.iconColor,
-      required this.text,
-      this.textColor})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          icon,
-          color: iconColor,
-          size: Dimensions.iconSize24,
-        ),
-        SizedBox(
-          width: Dimensions.width5,
-        ),
-        SmallText(
-          text: text,
-          color: textColor,
-        )
-      ],
     );
   }
 }
