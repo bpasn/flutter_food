@@ -34,11 +34,13 @@ class SmallText extends StatelessWidget {
   final String text;
   Color? color;
   double size;
+  double height;
   TextOverflow textoverflow;
 
   SmallText(
       {required this.text,
       this.size = 0,
+      this.height = 1.2,
       this.color = const Color(0xFF89dad0),
       this.textoverflow = TextOverflow.ellipsis});
   @override
@@ -48,9 +50,11 @@ class SmallText extends StatelessWidget {
       // overflow: textoverflow,
       style: TextStyle(
         color: color,
+        height: height,
         fontFamily: "Sukumvit",
         fontSize: size == 0 ? Dimensions.font12 : size,
         fontWeight: FontWeight.bold,
+        
       ),
     );
   }

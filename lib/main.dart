@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout/screen/food_detail/popular_food_detail.dart';
 import 'package:flutter_layout/screen/main_food_screen.dart';
+import 'package:flutter_layout/screen/recmomend_food_detail.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        home: PopularFoodDetail()
+        home: RecommendedFoodDetail()
         // MainFoodScreen(),
         );
   }
