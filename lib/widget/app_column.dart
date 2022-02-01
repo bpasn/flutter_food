@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout/models/products_models.dart';
 import 'package:flutter_layout/widget/icon_and_text_body.dart';
 import 'package:flutter_layout/until/dimention.dart';
 import 'package:flutter_layout/widget/text_widget.dart';
 
 class AppColumn extends StatelessWidget {
-  final String text;
-  AppColumn({required this.text});
+  late final String text;
+  late final ProductModel productModel;
+  AppColumn({required String text, product}) {
+    this.text = text;
+    this.productModel = product;
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,7 +24,7 @@ class AppColumn extends StatelessWidget {
           children: [
             Wrap(
               children: List.generate(
-                5,
+                productModel.stars!,
                 (index) => const Icon(
                   Icons.star,
                   color: Colors.blue,
@@ -30,7 +35,7 @@ class AppColumn extends StatelessWidget {
             SizedBox(
               width: Dimensions.width10,
             ),
-            SmallText(text: "4.5", color: Colors.grey),
+            SmallText(text: productModel.stars!.toString(), color: Colors.grey),
             SizedBox(
               width: Dimensions.width10,
             ),

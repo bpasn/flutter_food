@@ -1,12 +1,17 @@
-// ignore_for_file: sized_box_for_whitespace, avoid_unnecessary_containers, prefer_const_constructors
+// ignore_for_file: sized_box_for_whitespace, avoid_unnecessary_containers, prefer_const_constructors, prefer_is_empty
 
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_layout/data/controller/PopularProductController.dart';
+import 'package:flutter_layout/models/products_models.dart';
+import 'package:flutter_layout/until/app_constants.dart';
+import 'package:flutter_layout/until/colors.dart';
 import 'package:flutter_layout/widget/icon_and_text_body.dart';
 import 'package:flutter_layout/screen/main_food_screen.dart';
 import 'package:flutter_layout/until/dimention.dart';
 import 'package:flutter_layout/widget/app_column.dart';
 import 'package:flutter_layout/widget/text_widget.dart';
+import 'package:get/get.dart';
 
 class FoodBody extends StatefulWidget {
   @override
@@ -42,23 +47,32 @@ class _FoodBodyState extends State<FoodBody> {
     return Column(
       children: [
         //section card
-        Container(
-          height: Dimensions.pageView,
-          child: PageView.builder(
-            controller: pageController,
-            itemBuilder: (context, positon) => getWidgetFoodBody(positon),
-            itemCount: 5,
+        GetBuilder<PopularProductController>(
+          builder: (popularProducts) => Container(
+            height: Dimensions.pageView,
+            child: PageView.builder(
+              controller: pageController,
+              itemCount: popularProducts.popularProductList.length,
+              itemBuilder: (context, positon) => getWidgetFoodBody(
+                  positon, popularProducts.popularProductList[positon]),
+            ),
           ),
         ),
+
         //dots
-        DotsIndicator(
-          dotsCount: 5,
-          position: _curntPageValue,
-          decorator: DotsDecorator(
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
+        GetBuilder<PopularProductController>(
+          builder: (popularProducts) => DotsIndicator(
+            dotsCount: popularProducts.popularProductList.isEmpty
+                ? 1
+                : popularProducts.popularProductList.length,
+            position: _curntPageValue,
+            decorator: DotsDecorator(
+              activeColor: AppColors.mainColor,
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)),
+            ),
           ),
         ),
 
@@ -196,7 +210,8 @@ class _FoodBodyState extends State<FoodBody> {
     );
   }
 
-  Widget getWidgetFoodBody(int index) {
+  Widget getWidgetFoodBody(int index, ProductModel product) {
+    final String img = product.img!;
     Matrix4 matrix = new Matrix4.identity();
     if (index == _curntPageValue.floor()) {
       var currScal = 1 - (_curntPageValue - index) * (1 - _scaleFator);
@@ -231,9 +246,10 @@ class _FoodBodyState extends State<FoodBody> {
               left: Dimensions.height15, right: Dimensions.height15),
           height: Dimensions.pageViewContainer,
           decoration: BoxDecoration(
-            image: const DecorationImage(
+            image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage('./assets/image/pic_1.jpeg'),
+              image: NetworkImage(
+                  AppConstants.BASE_URL + '/uploads/' + product.img!),
             ),
             borderRadius: BorderRadius.circular(30),
           ),
@@ -258,7 +274,8 @@ class _FoodBodyState extends State<FoodBody> {
                 padding: EdgeInsets.only(
                     left: 10, right: 10, top: Dimensions.height15),
                 child: AppColumn(
-                  text: 'Blind',
+                  text: product.name!,
+                  product: product,
                 )),
           ),
         )
