@@ -2,33 +2,37 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_layout/data/controller/popular_product_controller.dart';
+import 'package:flutter_layout/data/controller/recommended_products_controller.dart';
+import 'package:flutter_layout/models/products_models.dart';
+import 'package:flutter_layout/routes/route_helper.dart';
+import 'package:flutter_layout/until/app_constants.dart';
 import 'package:flutter_layout/until/dimention.dart';
 import 'package:flutter_layout/widget/app_icon.dart';
 import 'package:flutter_layout/widget/exandable_text.dart';
 import 'package:flutter_layout/widget/text_widget.dart';
 import 'package:get/get.dart';
 
-class RecommendedFoodDetail extends StatefulWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
-  final double count = 0;
-  @override
-  State<RecommendedFoodDetail> createState() => _RecommendedFoodDetailState();
-}
 
-class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
-
+class RecommendedFoodDetail extends StatelessWidget {
+  final int pageId;
+   RecommendedFoodDetail({required this.pageId});
   @override
   Widget build(BuildContext context) {
+    ProductModel product = Get.find<RecommendedProductsController>().reccommendedProductList[pageId];
+    print(pageId);
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 80,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
+                GestureDetector(
+                    onTap: () => Get.toNamed(RouteHelper.getInitial()),
+                    child: AppIcon(icon: Icons.clear)),
                 AppIcon(icon: Icons.shopping_cart_outlined)
               ],
             ),
@@ -38,7 +42,7 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
               child: Container(
                 child: Center(
                   child:
-                      BigText(size: Dimensions.font26, text: "Sliver App Bar"),
+                      BigText(size: Dimensions.font26, text:product.name!),
                 ),
                 width: double.maxFinite,
                 padding: EdgeInsets.only(top: 5, bottom: 10),
@@ -53,8 +57,8 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
             backgroundColor: Colors.amber,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "./assets/image/pic_1.jpeg",
+              background: Image.network(
+                AppConstants.UPLOAD_URL+product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -67,8 +71,7 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
                   margin: EdgeInsets.only(
                       left: Dimensions.width20, right: Dimensions.width20),
                   child: ExpandbleText(
-                    text:
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    text:product.description!,
                   ),
                 ),
               ],
@@ -93,7 +96,7 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
                     iconSize: Dimensions.iconSize24,
                     icon: Icons.remove,
                     backgroundColor: Colors.blue[200]),
-                BigText(text: "\$12.88 X ${widget.count}"),
+                BigText(text: "\$ ${product.price} X 0"),
                 AppIcon(
                     iconSize: Dimensions.iconSize24,
                     icon: Icons.add,
@@ -143,7 +146,7 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
                   decoration: BoxDecoration(
                       color: Colors.greenAccent,
                       borderRadius: BorderRadius.circular(Dimensions.radius20)),
-                  child: BigText(text: "\$10|Add To Cart"),
+                  child: BigText(text: "\$ ${product.price }| Add To Cart"),
                 ),
               ],
             ),
@@ -151,5 +154,6 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
         ],
       ),
     );
+ 
   }
 }

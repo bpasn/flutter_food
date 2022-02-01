@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout/data/controller/popular_product_controller.dart';
 import 'package:flutter_layout/data/controller/recommended_products_controller.dart';
 import 'package:flutter_layout/models/products_models.dart';
+import 'package:flutter_layout/routes/route_helper.dart';
 import 'package:flutter_layout/screen/food_detail/popular_food_detail.dart';
 import 'package:flutter_layout/until/app_constants.dart';
 import 'package:flutter_layout/until/colors.dart';
@@ -53,12 +54,12 @@ class _FoodBodyState extends State<FoodBody> {
           builder: (popularProducts) => popularProducts.isLoading
               ? Container(
                   height: Dimensions.pageView,
-                  child: GestureDetector(
-                    onTap: () => Get.to(() => PopularFoodDetail()),
-                    child: PageView.builder(
-                      controller: pageController,
-                      itemCount: popularProducts.popularProductList.length,
-                      itemBuilder: (context, positon) => getWidgetFoodBody(
+                  child: PageView.builder(
+                    controller: pageController,
+                    itemCount: popularProducts.popularProductList.length,
+                    itemBuilder: (context, positon) => GestureDetector(
+                      onTap: () => Get.toNamed(RouteHelper.getPopularFood(positon)),
+                      child: getWidgetFoodBody(
                           positon, popularProducts.popularProductList[positon]),
                     ),
                   ),
@@ -122,7 +123,9 @@ class _FoodBodyState extends State<FoodBody> {
             ],
           ),
         ),
-
+         
+         
+         //List Food
         GetBuilder<RecommendedProductsController>(
             builder: (recommendedProduct) => recommendedProduct.isLoading
                 ? (Container(
@@ -132,13 +135,16 @@ class _FoodBodyState extends State<FoodBody> {
                       shrinkWrap: true,
                       itemCount:
                           recommendedProduct.reccommendedProductList.length,
-                      itemBuilder: (context, int index) => buildRecommanded(
+                      itemBuilder: (context, int index) => GestureDetector(
+                        onTap: () => Get.toNamed(RouteHelper.getRecommendedFood(index)),
+                        child: buildRecommanded(
                           recommendedProduct.reccommendedProductList[index]),
                     ),
+                      )
                   ))
                 : CircularProgressIndicator(color: AppColors.mainColor))
 
-        //List Food
+        
       ],
     );
   }
@@ -174,17 +180,23 @@ class _FoodBodyState extends State<FoodBody> {
     return Transform(
       transform: matrix,
       child: Stack(children: [
-        Container(
-          margin: EdgeInsets.only(
-              left: Dimensions.height15, right: Dimensions.height15),
-          height: Dimensions.pageViewContainer,
-          decoration: BoxDecoration(
-            color: AppColors.mainColor,
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(AppConstants.UPLOAD_URL + product.img!),
+        GestureDetector(
+         onTap:(){
+           print(index);
+             Get.toNamed(RouteHelper.getPopularFood(index));
+         },
+          child: Container(
+            height: Dimensions.pageViewContainer,
+            margin: EdgeInsets.only(
+                left: Dimensions.height15, right: Dimensions.height15),
+            decoration: BoxDecoration(
+              color: index.isEven?Color(0xFF69c5df):Color(0xFF9294cc),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(AppConstants.UPLOAD_URL + product.img!),
+              ),
+              borderRadius: BorderRadius.circular(30),
             ),
-            borderRadius: BorderRadius.circular(30),
           ),
         ),
         Align(

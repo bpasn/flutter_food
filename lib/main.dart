@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout/data/controller/popular_product_controller.dart';
 import 'package:flutter_layout/data/controller/recommended_products_controller.dart';
 import 'package:flutter_layout/helper/dependencies.dart' as dep;
+import 'package:flutter_layout/routes/route_helper.dart';
 import 'package:flutter_layout/screen/food_detail/popular_food_detail.dart';
 import 'package:flutter_layout/screen/main_food_screen.dart';
-import 'package:flutter_layout/screen/recmomend_food_detail.dart';
+import 'package:flutter_layout/screen/food_detail/recmomend_food_detail.dart';
 import 'package:get/get.dart';
 
 Future<void> main() async {
@@ -27,8 +28,10 @@ class MyApp extends StatelessWidget {
 
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        home: MainFoodScreen()
+        // title: 'Flutter Demo',
+        home: MainFoodScreen(),
+        initialRoute: RouteHelper.init,
+        getPages: RouteHelper.routes,
         //RecommendedFoodDetail()
         // MainFoodScreen(),
         );
