@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_layout/data/controller/PopularProductController.dart';
+import 'package:flutter_layout/data/controller/popular_product_controller.dart';
 import 'package:flutter_layout/until/dimention.dart';
 import 'package:flutter_layout/widget/app_icon.dart';
 import 'package:flutter_layout/widget/exandable_text.dart';
 import 'package:flutter_layout/widget/text_widget.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 
 class RecommendedFoodDetail extends StatefulWidget {
   const RecommendedFoodDetail({Key? key}) : super(key: key);

@@ -23,11 +23,7 @@ class _MainFoodScreenState extends State<MainFoodScreen> {
         SizedBox(
           height: Dimensions.height20,
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: FoodBody(),
-          ),
-        ),
+        Expanded(child: SingleChildScrollView(child: FoodBody())),
       ],
     ));
   }

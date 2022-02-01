@@ -8,6 +8,8 @@ class Dimensions {
   static double pageViewTextContainer = screenHeight / 7.03;
 
   // ต้องการความสูงของ10 เลยเอา ความสูงของDevice มา/10 ได้ออกมาเป็น 84.4
+  static double height2 = screenHeight / 442;
+  static double height3 = screenHeight / 281.3;
   static double height10 = screenHeight / 84.4;
   static double height15 = screenHeight / 56.27;
   static double height20 = screenHeight / 42.2;

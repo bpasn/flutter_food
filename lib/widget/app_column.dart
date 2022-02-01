@@ -6,10 +6,8 @@ import 'package:flutter_layout/widget/text_widget.dart';
 
 class AppColumn extends StatelessWidget {
   late final String text;
-  late final ProductModel productModel;
   AppColumn({required String text, product}) {
     this.text = text;
-    this.productModel = product;
   }
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class AppColumn extends StatelessWidget {
           children: [
             Wrap(
               children: List.generate(
-                productModel.stars!,
+               5,
                 (index) => const Icon(
                   Icons.star,
                   color: Colors.blue,
@@ -35,7 +33,7 @@ class AppColumn extends StatelessWidget {
             SizedBox(
               width: Dimensions.width10,
             ),
-            SmallText(text: productModel.stars!.toString(), color: Colors.grey),
+            SmallText(text:'5', color: Colors.grey),
             SizedBox(
               width: Dimensions.width10,
             ),
