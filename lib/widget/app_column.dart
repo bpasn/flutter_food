@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout/screen/food/icon_and_text_body.dart';
+import 'package:flutter_layout/widget/icon_and_text_body.dart';
 import 'package:flutter_layout/until/dimention.dart';
 import 'package:flutter_layout/widget/text_widget.dart';
 

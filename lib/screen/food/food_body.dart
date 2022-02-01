@@ -2,7 +2,7 @@
 
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_layout/screen/food/icon_and_text_body.dart';
+import 'package:flutter_layout/widget/icon_and_text_body.dart';
 import 'package:flutter_layout/screen/main_food_screen.dart';
 import 'package:flutter_layout/until/dimention.dart';
 import 'package:flutter_layout/widget/app_column.dart';

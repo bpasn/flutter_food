@@ -1,14 +1,19 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_layout/screen/food_detail/popular_food_detail.dart';
 import 'package:flutter_layout/until/dimention.dart';
+import 'package:flutter_layout/widget/app_icon.dart';
 import 'package:flutter_layout/widget/exandable_text.dart';
 import 'package:flutter_layout/widget/text_widget.dart';
 
-class RecommendedFoodDetail extends StatelessWidget {
+class RecommendedFoodDetail extends StatefulWidget {
   const RecommendedFoodDetail({Key? key}) : super(key: key);
+  final double count = 0;
+  @override
+  State<RecommendedFoodDetail> createState() => _RecommendedFoodDetailState();
+}
 
+class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +74,78 @@ class RecommendedFoodDetail extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Column(
-        
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: EdgeInsets.only(
+              left: Dimensions.width20 * 2.5,
+              right: Dimensions.width20 * 2.5,
+              top: Dimensions.height10,
+              bottom: Dimensions.height10,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                AppIcon(
+                    iconSize: Dimensions.iconSize24,
+                    icon: Icons.remove,
+                    backgroundColor: Colors.blue[200]),
+                BigText(text: "\$12.88 X ${widget.count}"),
+                AppIcon(
+                    iconSize: Dimensions.iconSize24,
+                    icon: Icons.add,
+                    backgroundColor: Colors.blue[200]),
+              ],
+            ),
+          ),
+          Container(
+            height: Dimensions.buttonHeightBar,
+            padding: EdgeInsets.only(
+              top: Dimensions.height30,
+              bottom: Dimensions.height30,
+              left: Dimensions.width20,
+              right: Dimensions.width20,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(Dimensions.radius20 * 2),
+                topRight: Radius.circular(Dimensions.radius20 * 2),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(
+                    top: Dimensions.height15,
+                    bottom: Dimensions.height15,
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(Dimensions.radius20)),
+                  child: Container(
+                    child: Icon(Icons.favorite, color: Colors.greenAccent),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                    top: Dimensions.height15,
+                    bottom: Dimensions.height15,
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.greenAccent,
+                      borderRadius: BorderRadius.circular(Dimensions.radius20)),
+                  child: BigText(text: "\$10|Add To Cart"),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

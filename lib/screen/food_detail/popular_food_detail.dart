@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout/screen/food/icon_and_text_body.dart';
+import 'package:flutter_layout/widget/app_icon.dart';
+import 'package:flutter_layout/widget/icon_and_text_body.dart';
 import 'package:flutter_layout/until/dimention.dart';
 import 'package:flutter_layout/widget/app_column.dart';
 import 'package:flutter_layout/widget/exandable_text.dart';
@@ -71,14 +72,14 @@ class PopularFoodDetail extends StatelessWidget {
                         height: Dimensions.height20,
                       ),
                       Container(child: BigText(text: "Introduce")),
-                       SizedBox(
+                      SizedBox(
                         height: Dimensions.height20,
                       ),
                       Expanded(
                         child: SingleChildScrollView(
                           child: ExpandbleText(
-                            text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-                          ),
+                              text:
+                                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
                         ),
                       ),
                     ],
@@ -145,29 +146,5 @@ class PopularFoodDetail extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class AppIcon extends StatelessWidget {
-  IconData icon;
-  Color? backgroundColor;
-  Color? iconColor;
-  double? size;
-
-  AppIcon(
-      {required this.icon,
-      this.backgroundColor = const Color(0xFFfcf4e4),
-      this.iconColor = const Color(0xFF756d54),
-      this.size = 40});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(size! / 2),
-          color: backgroundColor,
-        ),
-        child: Icon(icon, size: Dimensions.iconSize16, color: iconColor));
   }
 }
